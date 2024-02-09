@@ -1,0 +1,52 @@
+# Problem Set -----------------------------------------------------------------------------------------
+- LeetCode 1260
+- https://leetcode.com/problems/shift-2d-grid/description/
+
+Given a 2D grid of size m x n and an integer k. You need to shift the grid k times.
+
+In one shift operation:
+
+Element at grid[i][j] moves to grid[i][j + 1].
+Element at grid[i][n - 1] moves to grid[i + 1][0].
+Element at grid[m - 1][n - 1] moves to grid[0][0].
+Return the 2D grid after applying shift operation k times.
+
+
+
+
+# Solution Reference ---------------------------------------------------------------------------------- 
+# Link to https://leetcode.com/problems/shift-2d-grid/solutions/1936250/1260-shift-2d-grid/
+class Solution:
+    def shiftGrid(self, grid, k):
+        rows = len(grid)
+        cols = len(grid[0])
+        modulo = rows * cols
+        k = k % modulo
+        
+        if k == 0:
+            return grid
+
+        def swap_values(idx1, idx2):
+            row1 = idx1 // cols
+            col1 = idx1 % cols
+            row2 = idx2 // cols
+            col2 = idx2 % cols
+            grid[row1][col1], grid[row2][col2] = grid[row2][col2], grid[row1][col1]
+
+        idx = 0
+        new_idx = idx
+        elements_in_their_place = 0
+        
+        while elements_in_their_place < (modulo - 1):
+            new_idx = (new_idx + k) % modulo
+            
+            if idx == new_idx:
+                idx += 1
+                new_idx = idx
+                elements_in_their_place += 1
+                continue
+            
+            swap_values(idx, new_idx)
+            elements_in_their_place += 1
+        
+        return grid
