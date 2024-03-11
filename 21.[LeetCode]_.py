@@ -32,7 +32,7 @@ def dfs(x,y,local_sum):
     global max_sum
     global matrix
  
-    if matrix[x][y] == None:
+    if x < 0 or x >= len(matrix) or y < 0 or y >= len(matrix[0]):
         return local_sum
     if matrix[x][y] ==0:
         return local_sum
@@ -59,7 +59,8 @@ def dfs(x,y,local_sum):
         dfs(x,y-1,local_sum )
     
     return local_sum
-
+    
+    
 #--------------------------    
 a = dfs(0,0,0)
 
@@ -68,8 +69,34 @@ print(matrix)
 print("done")
 
 
+#-- chat g dfs 
+def dfs(x, y, local_sum):
+    
+    if x < 0 or x >= len(matrix) or y < 0 or y >= len(matrix[0]):
+        return local_sum
+    if matrix[x][y] != 1:
+        return local_sum
 
-        
+    local_sum += 1
+    matrix[x][y] = 0
+
+    local_sum = dfs(x+1, y, local_sum)
+    local_sum = dfs(x-1, y, local_sum)
+    local_sum = dfs(x, y+1, local_sum)
+    local_sum = dfs(x, y-1, local_sum)
+
+    return local_sum
+
+matrix = [[1,1,0,0],
+          [1,1,1,0],
+          [1,0,0,0],
+          [0,0,0,0]]
+
+b = dfs(0,0,0)
+print("local sum : ", b )
+print(matrix)
+print("done")
+
 
 #     #----     
 #     # to the right 
