@@ -39,3 +39,8 @@ for i in range(len(s)):
 if stack:
     result = 0
 print(result)
+
+
+### 결론
+
+주어진 코드의 시간복잡도는 \( O(n) \)입니다. 이는 문자열의 길이에 선형적으로 비례합니다.
